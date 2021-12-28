@@ -25,9 +25,9 @@ class Match:
 
     def print_names(self):  # this helps the cuurent client to know his identity during the match
         if threading.current_thread() is self.Player1:
-            return "The name of this Client 1 is:" + self.name1
+            return "\nThe name of this Client 1 is:" + self.name1
         else:
-            return "The name of this Client 2 is:" + self.name2
+            return "\nThe name of this Client 2 is:" + self.name2
 
     def player1_AnswerCorrect(self):
         with self.threadLock1:
