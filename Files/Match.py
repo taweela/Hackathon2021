@@ -29,11 +29,11 @@ class Match:
         else:
             return "\nThe name of this Client 2 is:" + self.name2
 
-    def player1_AnswerCorrect(self):
+    def player1_AnswerCorrect(self):  # increasing player 1 points to let him win
         with self.threadLock1:
             self.player1_result += 1
 
-    def player2_AnswerCorrect(self):
+    def player2_AnswerCorrect(self):    # increasing player 2 points to let him win
         with self.threadLock2:
             self.player2_result += 1
 
@@ -48,7 +48,7 @@ class Match:
         start_msg += ANSI.CYAN + "How much is " + self.Str + "?" + "\n" + ANSI.END
         return start_msg
 
-    def print_result(self):
+    def print_result(self):  # the result is printed to each one of the players screens
         result = ""
         if self.player1_result > self.player2_result:
             winner = self.name1

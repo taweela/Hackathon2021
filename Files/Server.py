@@ -21,6 +21,7 @@ def server_broadcast(server_port, broadcast_port):
     team_names = ["Rocket\n", "Instinct\n"]
     while True:
         Str = ""
+        # generating the equation
         a = random.randint(0, 4)
         b = random.randint(0, 5)
         Sum = a + b
@@ -34,8 +35,8 @@ def server_broadcast(server_port, broadcast_port):
             try:
                 conn, address = server_socket.accept()  # accept new connection
                 conn.settimeout(None)
-                team_name = receive_team_name(conn)
-                #team_name = team_names[i]
+                team_name = receive_team_name(conn)  # accept new connection
+                # team_name = team_names[i]
                 if team_name is None:
                     conn.close()
                 else:
@@ -56,19 +57,18 @@ def server_broadcast(server_port, broadcast_port):
         match.join_threads()
 
 
-
 def create_broadcast_socket():
-    udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
-    udp_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)  # broadcast socket
+    udp_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)  # start broadcasting
     udp_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
     return udp_socket
 
 
 def create_server_socket(server_port):
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.bind(('0.0.0.0', server_port))
+    server_socket.bind(('0.0.0.0', server_port))  # bind host address and port
     server_socket.settimeout(0.0)
-    server_socket.listen()
+    server_socket.listen()  # server start listening for clients
     return server_socket
 
 
@@ -81,7 +81,7 @@ def receive_team_name(client_socket):
             if not team_name:
                 print(ANSI.get_red() + "Client socket closed" + ANSI.get_end())
                 return None
-            if team_name[len(team_name) - 1] == '\n':
+            if team_name[len(team_name) - 1] == '\n':  # to make sure we have new line after each name
                 clear_socket_input_buffer(client_socket)
                 break
             else:
@@ -105,7 +105,7 @@ def clear_socket_input_buffer(client_socket):
 
 if __name__ == '__main__':
     ANSI.turn_on_colors()
-    serverPort = 2050
+    serverPort = 2050  # the server port
     broadcastPort = 13117
     msg = ANSI.get_cyan() + "Server started,listening on IP address : " + ANSI.get_end()
     msg += (ANSI.get_yellow() + socket.gethostbyname(socket.gethostname()) + ANSI.get_end())

@@ -15,7 +15,7 @@ class control:
     j = 0
 
     @staticmethod
-    def getInstance():
+    def getInstance():  # control class is a singleton class we have used it to find out the  first client who answers
         """ Static access method. """
         if control.__instance is None:
             control()
@@ -32,7 +32,7 @@ class control:
             control.__instance = self
 
     @classmethod
-    def getJ(cls):
+    def getJ(cls):  # synchronized methods to make sure only one client thread enters at the time
         cls.lock = threading.Lock()
         cls.lock.acquire()
         cls.j += 1
@@ -40,7 +40,7 @@ class control:
         return cls.j - 1
 
     @classmethod
-    def resetJ(cls):
+    def resetJ(cls):  # synchronized methods to make sure only one client thread enters at the time
         cls.lock = threading.Lock()
         cls.lock.acquire()
         cls.j = 0

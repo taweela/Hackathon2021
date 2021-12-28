@@ -37,16 +37,16 @@ class KBHit:
             pass
 
         else:
-
+            # save terminal settings
             self.fd = sys.stdin.fileno()
             self.new_term = termios.tcgetattr(self.fd)
             self.old_term = termios.tcgetattr(self.fd)
 
+            # new terminal settings
             self.new_term[3] = (self.new_term[3] & ~termios.ICANON & ~termios.ECHO)
             termios.tcsetattr(self.fd, termios.TCSAFLUSH, self.new_term)
 
             atexit.register(self.set_normal_term)
-
 
     def set_normal_term(self):
         ''' Resets to normal terminal.  On Windows this is a no-op.

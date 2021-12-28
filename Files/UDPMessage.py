@@ -18,6 +18,7 @@ def send_offer(port):
 
 
 def unpack_offer(udp_packet):
+    # get udp message with correct format
     try:
         unpacked_data = struct.unpack(ENC_FORMAT, udp_packet)
         if unpacked_data[0] == 0xfeedbeef and unpacked_data[1] == MESSAGE_TYPE:
