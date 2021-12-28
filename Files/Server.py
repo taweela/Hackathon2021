@@ -36,7 +36,7 @@ def server_broadcast(server_port, broadcast_port):
                 conn, address = server_socket.accept()  # accept new connection
                 conn.settimeout(None)
                 team_name = receive_team_name(conn)  # accept new connection
-                # team_name = team_names[i]
+                team_name = team_names[i]
                 if team_name is None:
                     conn.close()
                 else:
